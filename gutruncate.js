@@ -1,10 +1,10 @@
 ﻿(function($) {
     $.fn.gutruncate = function(options) {
         var defaults = {
-            length: 150,
-            minTrail: 20,
-            moreText: "more",
-            lessText: "less",
+            minLength: 150,
+            tolerance: 20,
+            readMoreText: "more",
+            readLessText: "less",
             ellipsisText: "&hellip;",
             reapply: false
         };
@@ -21,12 +21,12 @@
 
             //Don't apply if isnt long enough
             var body = element.html();
-            if (body.length <= options.length + options.minTrail) {
+            if (body.length <= options.minLength + options.tolerance) {
                 return true;
             }
 
             //Don't apply if is all one word
-            var splitLocation = body.indexOf(" ", options.length);
+            var splitLocation = body.indexOf(" ", options.minLength);
             if (splitLocation === -1) {
                 return true;
             }
@@ -45,7 +45,7 @@
                 + hiddenSection
                 + "</span><div>"
                 + "<a href=\"javascript:void(0)\" class=\"gutruncate-more-link\">"
-                + options.moreText
+                + options.readMoreText
                 + "</a>"
                 + "</div>"
             );
@@ -59,13 +59,13 @@
             var ellipsis = $(".gutruncate-ellipsis", element);
 
             moreLink.click(function() {
-                if (moreLink.text() == options.moreText) {
+                if (moreLink.text() == options.readMoreText) {
                     moreContent.css("display", "inline");
-                    moreLink.text(options.lessText);
+                    moreLink.text(options.readLessText);
                     ellipsis.css("display", "none");
                 } else {
                     moreContent.css("display", "none");
-                    moreLink.text(options.moreText);
+                    moreLink.text(options.readMoreText);
                     ellipsis.css("display", "inline");
                 }
 
