@@ -3,6 +3,9 @@ gutruncate
 
 jQuery plugin to truncate text with a read more / read less button.
 
+## Demo
+http://glassumbrella.github.io/gutruncate/
+
 
 ## Usage
 
