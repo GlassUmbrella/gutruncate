@@ -5,7 +5,7 @@
             minTrail: 20,
             moreText: "more",
             lessText: "less",
-            ellipsisText: "...",
+            ellipsisText: "&hellip;",
             reapply: false
         };
 
@@ -43,20 +43,15 @@
                 + "</span>"
                 + "<span class=\"gutruncate-more\">"
                 + hiddenSection
-                + "</span>"
-            );
-
-            //Hide hidden section
-            element.find(".gutruncate-more").css("display", "none");
-
-            //Add more link
-            element.append(
-                "<div>"
+                + "</span><div>"
                 + "<a href=\"javascript:void(0)\" class=\"gutruncate-more-link\">"
                 + options.moreText
                 + "</a>"
                 + "</div>"
-			);
+            );
+
+            //Hide hidden section
+            element.find(".gutruncate-more").css("display", "none");
 
             //Add click handler to hide/show
             var moreLink = $(".gutruncate-more-link", element);
