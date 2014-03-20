@@ -1,7 +1,7 @@
 gutruncate
 ==========
 
-jQuery plugin to truncate text with a read more / read less button.
+jQuery plugin to truncate text with a knockout js binding handler.
 
 ## Demo
 http://glassumbrella.github.io/gutruncate/
