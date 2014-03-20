@@ -52,6 +52,7 @@
 
             //Hide hidden section
             element.find(".gutruncate-more").css("display", "none");
+            $(element).data("gutruncate_state", "truncated");
 
             //Add click handler to hide/show
             var moreLink = $(".gutruncate-more-link", element);
@@ -59,20 +60,58 @@
             var ellipsis = $(".gutruncate-ellipsis", element);
 
             moreLink.click(function() {
-                if (moreLink.text() == options.readMoreText) {
-                    moreContent.css("display", "inline");
-                    moreLink.text(options.readLessText);
-                    ellipsis.css("display", "none");
+                if ($(element).data("gutruncate_state") === "truncated") {
+                    showContent(element, moreContent, moreLink, ellipsis);
                 } else {
-                    moreContent.css("display", "none");
-                    moreLink.text(options.readMoreText);
-                    ellipsis.css("display", "inline");
+                    truncateContent(element, moreContent, moreLink, ellipsis);
                 }
-
                 return false;
             });
+
+            var showContent = function(element, moreContent, moreLink, ellipsis) {
+                $(element).data("gutruncate_state", "shown");
+                moreContent.css("display", "inline");
+                moreLink.text(options.readLessText);
+                ellipsis.css("display", "none");
+            };
+
+            var truncateContent = function(element, moreContent, moreLink, ellipsis) {
+                $(element).data("gutruncate_state", "truncated");
+                moreContent.css("display", "none");
+                moreLink.text(options.readMoreText);
+                ellipsis.css("display", "inline");
+            };
 
             element.addClass("gutruncate");
         });
     };
+
+    if(ko !== undefined && ko.bindingHandlers !== undefined) {
+        ko.bindingHandlers.gutruncate = {
+            init: function(element, valueAccessor, allBindings) {
+                var text = ko.unwrap(valueAccessor());
+
+                var options = {
+                    minLength: allBindings.get("minLength"),
+                    tolerance: allBindings.get("tolerance"),
+                    readMoreText: allBindings.get("readMoreText"),
+                    readLessText: allBindings.get("readLessText"),
+                    ellipsisText: allBindings.get("ellipsisText")
+                };
+
+                $(element).html(text);
+                $(element).data("gutruncate_options", options);
+                $(element).gutruncate(options);
+            },
+            update: function(element, valueAccessor, allBindings) {
+                var text = ko.unwrap(valueAccessor());
+
+                var options = $(element).data("gutruncate_options");
+                options.reapply = true;
+
+                $(element).html(text);
+                $(element).gutruncate(options);
+            }
+        };
+    }
 })(jQuery);
