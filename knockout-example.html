@@ -1,9 +1,12 @@
 <html>
 	<head>
-		<title>gutruncate demo</title>
+		<title>gutruncate - knockout demo</title>
 	</head>
 	<body>
 		<input data-bind="value: myText, valueUpdate: 'afterkeydown'">
+		<p data-bind="gutruncate: myText"></p>
+		<p data-bind="gutruncate: myText"></p>
+		<p data-bind="gutruncate: myText"></p>
 		<p data-bind="gutruncate: myText"></p>
 
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>

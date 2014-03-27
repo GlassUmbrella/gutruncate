@@ -50,37 +50,36 @@
                 + "</div>"
             );
 
-            //Hide hidden section
-            element.find(".gutruncate-more").css("display", "none");
-            $(element).data("gutruncate_state", "truncated");
-
-            //Add click handler to hide/show
             var moreLink = $(".gutruncate-more-link", element);
             var moreContent = $(".gutruncate-more", element);
             var ellipsis = $(".gutruncate-ellipsis", element);
 
-            moreLink.click(function() {
-                if ($(element).data("gutruncate_state") === "truncated") {
-                    showContent(element, moreContent, moreLink, ellipsis);
-                } else {
-                    truncateContent(element, moreContent, moreLink, ellipsis);
-                }
-                return false;
-            });
-
-            var showContent = function(element, moreContent, moreLink, ellipsis) {
-                $(element).data("gutruncate_state", "shown");
+            var _showContent = function() {
+                element.data("gutruncate_state", "shown");
                 moreContent.css("display", "inline");
                 moreLink.text(options.readLessText);
                 ellipsis.css("display", "none");
             };
 
-            var truncateContent = function(element, moreContent, moreLink, ellipsis) {
-                $(element).data("gutruncate_state", "truncated");
+            var _truncateContent = function() {
+                element.data("gutruncate_state", "truncated");
                 moreContent.css("display", "none");
                 moreLink.text(options.readMoreText);
                 ellipsis.css("display", "inline");
             };
+
+            //Start off truncated
+            _truncateContent();
+
+            //Add click handler
+            moreLink.click(function() {
+                if (element.data("gutruncate_state") === "truncated") {
+                    _showContent(element, moreContent, moreLink, ellipsis);
+                } else {
+                    _truncateContent(element, moreContent, moreLink, ellipsis);
+                }
+                return false;
+            });
 
             element.addClass("gutruncate");
         });
