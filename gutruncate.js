@@ -123,16 +123,29 @@
     };
 
     if(ko !== undefined && ko.bindingHandlers !== undefined) {
+        var _gutruncate = function(element, valueAccessor) {
+            var binding = ko.unwrap(valueAccessor());
+            var options = { };
+            var text = "";
+
+            if(typeof binding === "string") {
+                text = binding;
+            } else {
+                text = ko.unwrap(binding.text);
+                options = ko.unwrap(binding.options);
+            }
+
+            options.reapply = true;
+            $(element).html(text);
+            $(element).gutruncate(options);
+        };
+
         ko.bindingHandlers.gutruncate = {
             init: function(element, valueAccessor, allBindings) {
-                var text = ko.unwrap(valueAccessor());
-                $(element).html(text);
-                $(element).gutruncate();
+                _gutruncate(element, valueAccessor);
             },
             update: function(element, valueAccessor, allBindings) {
-                var text = ko.unwrap(valueAccessor());
-                $(element).html(text);
-                $(element).gutruncate({ reapply: true });
+                _gutruncate(element, valueAccessor);
             }
         };
     }
