@@ -12,16 +12,52 @@
 
         var options = $.extend(defaults, options);
 
-        return this.each(function() {
-            element = $(this);            
+        var _showContent = function($element) {
+            var moreLink = $(".gutruncate-more-link", $element);
+            var moreContent = $(".gutruncate-more", $element);
+            var ellipsis = $(".gutruncate-ellipsis", $element);
+
+            $element.addClass("gutruncate_open");
+            $element.removeClass("gutruncate_closed");
+            moreContent.css("display", "inline");
+            moreLink.text(options.readLessText);
+            ellipsis.css("display", "none");
+        };
+
+        var _truncateContent = function($element) {
+            var moreLink = $(".gutruncate-more-link", $element);
+            var moreContent = $(".gutruncate-more", $element);
+            var ellipsis = $(".gutruncate-ellipsis", $element);
+
+            $element.removeClass("gutruncate_open");
+            $element.addClass("gutruncate_closed");
+            moreContent.css("display", "none");
+            moreLink.text(options.readMoreText);
+            ellipsis.css("display", "inline");
+        };
+
+        var _toggleContent = function() {
+            $element = $(this).closest(".gutruncate");
+
+            if ($element.hasClass("gutruncate_closed")) {
+                _showContent($element);
+            } else {
+                _truncateContent($element);
+            }
+            return false;
+        };
+
+        return this.each(function(index, element) {
+
+            $element = $(element);
 
             //Don't reapply
-            if (element.hasClass("gutruncate") && !options.reapply) {
+            if ($element.hasClass("gutruncate") && !options.reapply) {
                 return true;
             }
 
             //Don't apply if isnt long enough
-            var body = element.html();
+            var body = $element.html();
             if (body.length <= options.minLength + options.tolerance) {
                 return true;
             }
@@ -37,7 +73,7 @@
             var hiddenSection = body.substring(splitLocation, body.length - 1);
 
             //Update DOM
-            element.html(
+            $element.html(
                 visibleSection
                 + "<span class=\"gutruncate-ellipsis\">"
                 + options.ellipsisText
@@ -54,40 +90,14 @@
                 + (options.blockLevelMore ? "</div>" : "")
             );
 
-            var moreLink = $(".gutruncate-more-link", element);
-            var moreContent = $(".gutruncate-more", element);
-            var ellipsis = $(".gutruncate-ellipsis", element);
-
-            var _showContent = function() {
-                element.addClass("gutruncate_open");
-                element.removeClass("gutruncate_closed");
-                moreContent.css("display", "inline");
-                moreLink.text(options.readLessText);
-                ellipsis.css("display", "none");
-            };
-
-            var _truncateContent = function() {
-                element.removeClass("gutruncate_open");
-                element.addClass("gutruncate_closed");
-                moreContent.css("display", "none");
-                moreLink.text(options.readMoreText);
-                ellipsis.css("display", "inline");
-            };
-
             //Start off truncated
-            _truncateContent();
+            _truncateContent($element);
 
             //Add click handler
-            moreLink.click(function() {
-                if (element.hasClass("gutruncate_closed")) {
-                    _showContent();
-                } else {
-                    _truncateContent();
-                }
-                return false;
-            });
+            $(".gutruncate-more-link", $element).click(_toggleContent);
 
-            element.addClass("gutruncate");
+            //Finished
+            $element.addClass("gutruncate");
         });
     };
 
