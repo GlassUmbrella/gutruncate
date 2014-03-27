@@ -48,7 +48,6 @@
         };
 
         return this.each(function(index, element) {
-
             $element = $(element);
 
             //Don't reapply
@@ -105,27 +104,13 @@
         ko.bindingHandlers.gutruncate = {
             init: function(element, valueAccessor, allBindings) {
                 var text = ko.unwrap(valueAccessor());
-
-                var options = {
-                    minLength: allBindings.get("minLength"),
-                    tolerance: allBindings.get("tolerance"),
-                    readMoreText: allBindings.get("readMoreText"),
-                    readLessText: allBindings.get("readLessText"),
-                    ellipsisText: allBindings.get("ellipsisText")
-                };
-
                 $(element).html(text);
-                $(element).data("gutruncate_options", options);
-                $(element).gutruncate(options);
+                $(element).gutruncate();
             },
             update: function(element, valueAccessor, allBindings) {
                 var text = ko.unwrap(valueAccessor());
-
-                var options = $(element).data("gutruncate_options");
-                options.reapply = true;
-
                 $(element).html(text);
-                $(element).gutruncate(options);
+                $(element).gutruncate({ reapply: true });
             }
         };
     }
