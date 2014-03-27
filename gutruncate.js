@@ -141,12 +141,8 @@
         };
 
         ko.bindingHandlers.gutruncate = {
-            init: function(element, valueAccessor, allBindings) {
-                _gutruncate(element, valueAccessor);
-            },
-            update: function(element, valueAccessor, allBindings) {
-                _gutruncate(element, valueAccessor);
-            }
+            init: _gutruncate,
+            update: _gutruncate
         };
     }
 })(jQuery);
