@@ -22,6 +22,7 @@ $(".my-long-text").gutruncate({
   readMoreText: "see more", //text of the read more link
   readLessText: "see less", //text of the read less link
   ellipsisText: "...", //what to use to signify the text has been truncated
+  blockLevelMore: false, //if false more link will not be place on a new line
   reapply: false //if true gutruncate will be recreated
 });
 ```
