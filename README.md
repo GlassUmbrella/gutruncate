@@ -3,26 +3,41 @@ gutruncate
 
 jQuery plugin to truncate text with a knockout js binding handler.
 
-## Demo
-http://glassumbrella.github.io/gutruncate/
-
-
-## Usage
+## jQuery
+### Usage
 
 ```javascript
 $(".my-long-text").gutruncate();
 ```
 
-## Advanced Usage
+### Advanced Usage
 
 ```javascript
 $(".my-long-text").gutruncate({
-  minLength: 150, //amount of text to show
-  tolerance: 20, //amount of tolerance
-  readMoreText: "see more", //text of the read more link
-  readLessText: "see less", //text of the read less link
-  ellipsisText: "...", //what to use to signify the text has been truncated
-  blockLevelMore: false, //if false more link will not be place on a new line
-  reapply: false //if true gutruncate will be recreated
+  minLength: 50,
+  readMoreText: "click me",
 });
 ```
+
+## Knockout.js
+### Usage
+
+```html
+<p data-bind="gutruncate: myText"></p>
+```
+
+### Advanced Usage
+
+```html
+<p data-bind="gutruncate: { text: myText, options: { minLength: 10, readMoreText: 'click me' } }"></p>
+```
+
+## Settings
+
+* minLength - the minimum amount of text to display. **default:** 150
+* tolerance: - the amount of tolerance between the minLength and actual shown characters. **default:** 20
+* readMoreText - the text to display on the show more link. **default:** "more"
+* readLessText - the text to display on the show less link. **default:** "less"
+* ellipsisText - the text to show for the ellipsis. **default:** "..."
+* blockLevelMore - if true the read more link will be on a new line. **default:** true
+* reapply - if set to true gutruncate will be deleted and recreated. **default:** false
