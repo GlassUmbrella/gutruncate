@@ -34,10 +34,10 @@ $(".my-long-text").gutruncate({
 
 ## Settings
 
-* minLength - the minimum amount of text to display. **default:** 150
-* tolerance: - the amount of tolerance between the minLength and actual shown characters. **default:** 20
-* readMoreText - the text to display on the show more link. **default:** "more"
-* readLessText - the text to display on the show less link. **default:** "less"
-* ellipsisText - the text to show for the ellipsis. **default:** "..."
-* blockLevelMore - if true the read more link will be on a new line. **default:** true
-* reapply - if set to true gutruncate will be deleted and recreated. **default:** false
+* **minLength** - the minimum amount of text to display. *default: 150*
+* **tolerance** - the amount of tolerance between the minLength and actual shown characters. *default: 20*
+* **readMoreText** - the text to display on the show more link. *default: "more"*
+* **readLessText** - the text to display on the show less link. *default: "less"*
+* **ellipsisText** - the text to show for the ellipsis. *default: "..."*
+* **blockLevelMore** - if true the read more link will be on a new line. *default: true*
+* **reapply** - if set to true gutruncate will be deleted and recreated. *default: false*
