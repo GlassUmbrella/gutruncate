@@ -6,6 +6,7 @@
             readMoreText: "more",
             readLessText: "less",
             ellipsisText: "&hellip;",
+            blockLevelMore: true,
             reapply: false
         };
 
@@ -41,13 +42,16 @@
                 + "<span class=\"gutruncate-ellipsis\">"
                 + options.ellipsisText
                 + "</span>"
+
                 + "<span class=\"gutruncate-more\">"
                 + hiddenSection
-                + "</span><div>"
+                + "</span>"
+
+                + (options.blockLevelMore ? "<div>" : " ")
                 + "<a href=\"javascript:void(0)\" class=\"gutruncate-more-link\">"
                 + options.readMoreText
                 + "</a>"
-                + "</div>"
+                + (options.blockLevelMore ? "</div>" : "")
             );
 
             var moreLink = $(".gutruncate-more-link", element);
@@ -55,14 +59,16 @@
             var ellipsis = $(".gutruncate-ellipsis", element);
 
             var _showContent = function() {
-                element.data("gutruncate_state", "shown");
+                element.addClass("gutruncate_open");
+                element.removeClass("gutruncate_closed");
                 moreContent.css("display", "inline");
                 moreLink.text(options.readLessText);
                 ellipsis.css("display", "none");
             };
 
             var _truncateContent = function() {
-                element.data("gutruncate_state", "truncated");
+                element.removeClass("gutruncate_open");
+                element.addClass("gutruncate_closed");
                 moreContent.css("display", "none");
                 moreLink.text(options.readMoreText);
                 ellipsis.css("display", "inline");
@@ -73,10 +79,10 @@
 
             //Add click handler
             moreLink.click(function() {
-                if (element.data("gutruncate_state") === "truncated") {
-                    _showContent(element, moreContent, moreLink, ellipsis);
+                if (element.hasClass("gutruncate_closed")) {
+                    _showContent();
                 } else {
-                    _truncateContent(element, moreContent, moreLink, ellipsis);
+                    _truncateContent();
                 }
                 return false;
             });
