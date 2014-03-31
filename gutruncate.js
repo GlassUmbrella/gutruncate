@@ -128,6 +128,10 @@
             var options = { };
             var text = "";
 
+            if(binding === null) {
+                binding = "";
+            }
+
             if(typeof binding === "string") {
                 text = binding;
             } else {
