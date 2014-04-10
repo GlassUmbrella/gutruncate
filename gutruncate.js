@@ -91,7 +91,7 @@
 
             //Split text
             var visibleSection = body.substring(0, splitLocation);
-            var hiddenSection = body.substring(splitLocation, body.length - 1);
+            var hiddenSection = body.substring(splitLocation);
 
             //Update DOM
             $element.html(
