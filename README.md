@@ -3,6 +3,13 @@ gutruncate
 
 jQuery plugin to truncate text with a knockout js binding handler.
 
+## Example
+
+### Truncated
+![](http://imgur.com/66J397m.png)
+### Expanded
+![](http://imgur.com/SnA2CFZ.png)
+
 ## jQuery
 ### Usage
 
