@@ -1,7 +1,7 @@
 gutruncate
 ==========
 
-jQuery plugin to truncate text with a knockout js binding handler.
+Tiny jQuery plugin to truncate text with a knockout js binding handler.
 
 ## Example
 
