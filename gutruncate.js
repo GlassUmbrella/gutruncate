@@ -78,7 +78,7 @@
             }
 
             //Don't apply if isnt long enough
-            var body = $element.html();
+            var body = $element.html().trim();
             if (body.length <= options.minLength + options.tolerance) {
                 return true;
             }
@@ -122,21 +122,21 @@
         });
     };
 
-    if(ko !== undefined && ko.bindingHandlers !== undefined) {
+    if (ko !== undefined && ko.bindingHandlers !== undefined) {
         var _gutruncate = function(element, valueAccessor) {
             var binding = ko.unwrap(valueAccessor());
-            var options = { };
+            var options = {};
             var text = "";
 
-            if(binding === null) {
+            if (binding === null) {
                 binding = "";
             }
 
-            if(typeof binding === "string") {
+            if (typeof binding === "string") {
                 text = binding;
             } else {
                 text = ko.unwrap(binding.text);
-                if(binding.options) {
+                if (binding.options) {
                     options = ko.unwrap(binding.options);
                 }
             }
