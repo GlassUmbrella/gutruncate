@@ -136,7 +136,9 @@
                 text = binding;
             } else {
                 text = ko.unwrap(binding.text);
-                options = ko.unwrap(binding.options);
+                if(binding.options) {
+                    options = ko.unwrap(binding.options);
+                }
             }
 
             options.reapply = true;
