@@ -24,7 +24,7 @@
     $.fn.gutruncate = function(options) {
         var defaults = {
             minLength: 150,
-            tolerance: 20,
+            tolerance: 80,
             readMoreText: "more",
             readLessText: "less",
             ellipsisText: "&hellip;",
