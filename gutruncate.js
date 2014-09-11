@@ -29,7 +29,8 @@
             readLessText: "less",
             ellipsisText: "&hellip;",
             blockLevelMore: true,
-            reapply: false
+            reapply: false,
+            togglePosition: "bottom"
         };
 
         var options = $.extend(defaults, options);
@@ -89,6 +90,11 @@
                 return true;
             }
 
+            //If can't find a safe place to split within tolerance - split at exact length
+            if (splitLocation > (options.minLength + options.tolerance)) {
+                splitLocation = options.minLength;
+            }
+
             //Split text
             var visibleSection = body.substring(0, splitLocation);
             var hiddenSection = body.substring(splitLocation);
@@ -103,13 +109,19 @@
                 + "<span class=\"gutruncate-more\">"
                 + hiddenSection
                 + "</span>"
+            );
 
-                + (options.blockLevelMore ? "<div>" : " ")
+            var toggle = (options.blockLevelMore ? "<div>" : " ")
                 + "<a href=\"javascript:void(0)\" class=\"gutruncate-more-link\">"
                 + options.readMoreText
                 + "</a>"
-                + (options.blockLevelMore ? "</div>" : "")
-            );
+                + (options.blockLevelMore ? "</div>" : "");
+
+            if(options.togglePosition === "bottom") {
+                $element.append(toggle);
+            } else if(options.togglePosition === "top") {
+                $element.prepend(toggle);
+            }
 
             //Start off truncated
             _truncateContent($element);

@@ -3,11 +3,13 @@
 		<title>gutruncate - knockout demo</title>
 	</head>
 	<body>
-		<input data-bind="value: myText, valueUpdate: 'afterkeydown'">
-		<p data-bind="gutruncate: { text: myText, options: { minLength: 10, readMoreText: 'click me' } }"></p>
+		<textarea data-bind="value: myText, valueUpdate: 'afterkeydown'"></textarea>
+		
 		<p data-bind="gutruncate: null"></p>
 		<p data-bind="gutruncate: myText"></p>
-		<p data-bind="gutruncate: myText"></p>
+		<p data-bind="gutruncate: { text: myText, options: { togglePosition: 'top' } }"></p>
+
+		<p data-bind="gutruncate: { text: myText, options: { minLength: 0, tolerance: 0, ellipsisText: '', readMoreText: 'Show message', readLessText: 'Hide message', togglePosition: 'top' } }"></p>
 
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>

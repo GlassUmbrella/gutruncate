@@ -48,3 +48,4 @@ $(".my-long-text").gutruncate({
 * **ellipsisText** - the text to show for the ellipsis. *default: "..."*
 * **blockLevelMore** - if true the read more link will be on a new line. *default: true*
 * **reapply** - if set to true gutruncate will be deleted and recreated. *default: false*
+* **togglePosition** - sets if the show/hide link should appear above (top) or below (bottom) the message. *default: bottom*
