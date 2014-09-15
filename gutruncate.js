@@ -41,6 +41,11 @@
             var moreContent = $(".gutruncate-more", $element);
             var ellipsis = $(".gutruncate-ellipsis", $element);
 
+            if(options.externalToggle) {
+                $(options.externalToggle).addClass("gutruncate_open");
+                $(options.externalToggle).removeClass("gutruncate_closed");
+            }
+
             $element.addClass("gutruncate_open");
             $element.removeClass("gutruncate_closed");
             moreContent.css("display", "inline");
@@ -52,6 +57,11 @@
             var moreLink = $(".gutruncate-more-link", $element);
             var moreContent = $(".gutruncate-more", $element);
             var ellipsis = $(".gutruncate-ellipsis", $element);
+
+            if(options.externalToggle) {
+                $(options.externalToggle).removeClass("gutruncate_open");
+                $(options.externalToggle).addClass("gutruncate_closed");
+            }
 
             $element.removeClass("gutruncate_open");
             $element.addClass("gutruncate_closed");
