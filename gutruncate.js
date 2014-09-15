@@ -30,7 +30,8 @@
             ellipsisText: "&hellip;",
             blockLevelMore: true,
             reapply: false,
-            togglePosition: "bottom"
+            togglePosition: "bottom",
+            externalToggle: null
         };
 
         var options = $.extend(defaults, options);
@@ -59,8 +60,8 @@
             ellipsis.css("display", "inline");
         };
 
-        var _toggleContent = function() {
-            $element = $(this).closest(".gutruncate");
+        var _toggleContent = function(evt) {
+            $element = $(evt.target).closest(".gutruncate");
 
             if ($element.hasClass("gutruncate_closed")) {
                 _showContent($element);
@@ -71,6 +72,7 @@
         };
 
         return this.each(function(index, element) {
+
             $element = $(element);
 
             //Don't reapply
@@ -111,23 +113,34 @@
                 + "</span>"
             );
 
-            var toggle = (options.blockLevelMore ? "<div>" : " ")
-                + "<a href=\"javascript:void(0)\" class=\"gutruncate-more-link\">"
-                + options.readMoreText
-                + "</a>"
-                + (options.blockLevelMore ? "</div>" : "");
+            if (!options.externalToggle) {
+                //Add toggle link
+                var toggle = (options.blockLevelMore ? "<div>" : " ")
+                    + "<a href=\"javascript:void(0)\" class=\"gutruncate-more-link\">"
+                    + options.readMoreText
+                    + "</a>"
+                    + (options.blockLevelMore ? "</div>" : "");
 
-            if(options.togglePosition === "bottom") {
-                $element.append(toggle);
-            } else if(options.togglePosition === "top") {
-                $element.prepend(toggle);
+                if(options.togglePosition === "bottom") {
+                    $element.append(toggle);
+                } else if(options.togglePosition === "top") {
+                    $element.prepend(toggle);
+                }
+
+                //Add click handler
+                $(".gutruncate-more-link", $element).click(_toggleContent);
+            } else if (!$element.hasClass("gutruncate")) {
+                //Huck-up external toggle
+                var target = this;
+                $(options.externalToggle).click(function() {
+                    _toggleContent({
+                        target: target
+                    });
+                });
             }
 
             //Start off truncated
             _truncateContent($element);
-
-            //Add click handler
-            $(".gutruncate-more-link", $element).click(_toggleContent);
 
             //Finished
             $element.addClass("gutruncate");
@@ -153,7 +166,7 @@
                 }
             }
 
-            options.reapply = true;
+            options.reapply = true; //Needs to rerun when changed
             $(element).html(text);
             $(element).gutruncate(options);
         };

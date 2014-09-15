@@ -4,10 +4,23 @@
 	</head>
 	<body>
 		<textarea data-bind="value: myText, valueUpdate: 'afterkeydown'"></textarea>
+
+		<hr>
 		
-		<p data-bind="gutruncate: null"></p>
 		<p data-bind="gutruncate: myText"></p>
+
+		<hr>
+
+		<div>
+			<button id="external-toggle">Toggle</button>
+			<p data-bind="gutruncate: { text: myText, options: { externalToggle: '#external-toggle' } }"></p>
+		</div>
+
+		<hr>
+
 		<p data-bind="gutruncate: { text: myText, options: { togglePosition: 'top' } }"></p>
+
+		<hr>
 
 		<p data-bind="gutruncate: { text: myText, options: { minLength: 0, tolerance: 0, ellipsisText: '', readMoreText: 'Show message', readLessText: 'Hide message', togglePosition: 'top' } }"></p>
 
