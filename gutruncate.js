@@ -90,11 +90,14 @@
                 return true;
             }
 
-            //Don't apply if isnt long enough
             var body = $element.html().trim();
+
+            //Don't apply if isnt long enough
             if (body.length <= options.minLength + options.tolerance) {
                 return true;
             }
+
+
 
             //Don't apply if is all one word
             var splitLocation = body.indexOf(" ", options.minLength);
@@ -177,7 +180,7 @@
             }
 
             options.reapply = true; //Needs to rerun when changed
-            $(element).html(text);
+            $(element).html(htmlEncode(text));
             $(element).gutruncate(options);
         };
 
@@ -185,5 +188,9 @@
             init: _gutruncate,
             update: _gutruncate
         };
+    }
+
+    function htmlEncode(value) {
+        return $('<div/>').text(value).html();
     }
 })(jQuery);
