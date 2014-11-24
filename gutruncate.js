@@ -20,7 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-(function($) {
+;
+(function(factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery', 'knockout'], factory);
+    } else {
+        factory(jQuery, ko);
+    }
+}(function($, ko) {
     $.fn.gutruncate = function(options) {
         var defaults = {
             minLength: 150,
@@ -41,7 +48,7 @@
             var moreContent = $(".gutruncate-more", $element);
             var ellipsis = $(".gutruncate-ellipsis", $element);
 
-            if(options.externalToggle) {
+            if (options.externalToggle) {
                 $(options.externalToggle).addClass("gutruncate_open");
                 $(options.externalToggle).removeClass("gutruncate_closed");
             }
@@ -58,7 +65,7 @@
             var moreContent = $(".gutruncate-more", $element);
             var ellipsis = $(".gutruncate-ellipsis", $element);
 
-            if(options.externalToggle) {
+            if (options.externalToggle) {
                 $(options.externalToggle).removeClass("gutruncate_open");
                 $(options.externalToggle).addClass("gutruncate_closed");
             }
@@ -98,8 +105,7 @@
             }
 
 
-
-            //Don't apply if is all one word
+//Don't apply if is all one word
             var splitLocation = body.indexOf(" ", options.minLength);
             if (splitLocation === -1) {
                 return true;
@@ -120,7 +126,6 @@
                 + "<span class=\"gutruncate-ellipsis\">"
                 + options.ellipsisText
                 + "</span>"
-
                 + "<span class=\"gutruncate-more\">"
                 + hiddenSection
                 + "</span>"
@@ -134,9 +139,9 @@
                     + "</a>"
                     + (options.blockLevelMore ? "</div>" : "");
 
-                if(options.togglePosition === "bottom") {
+                if (options.togglePosition === "bottom") {
                     $element.append(toggle);
-                } else if(options.togglePosition === "top") {
+                } else if (options.togglePosition === "top") {
                     $element.prepend(toggle);
                 }
 
@@ -193,4 +198,4 @@
     function htmlEncode(value) {
         return $('<div/>').text(value).html();
     }
-})(jQuery);
+}));
