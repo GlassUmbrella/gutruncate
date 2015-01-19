@@ -104,10 +104,9 @@
                 return true;
             }
 
-
-//Don't apply if is all one word
+            //Don't apply if is all one word
             var splitLocation = body.indexOf(" ", options.minLength);
-            if (splitLocation === -1) {
+            if (splitLocation === -1 && (options.minLength + options.tolerance) > 0) {
                 return true;
             }
 
