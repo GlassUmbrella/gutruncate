@@ -1,0 +1,13 @@
+{
+  "name": "gutruncate",
+  "main": "gutruncate.js",
+  "homepage": "https://github.com/GlassUmbrella/gutruncate",
+  "authors": [
+    "Eddie Lee"
+  ],
+  "description": "Glass Umbrella Truncation",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
